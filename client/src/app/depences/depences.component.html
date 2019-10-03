@@ -1,0 +1,152 @@
+<app-navbar></app-navbar>
+<main class="pt-4 fontsize07">
+  <div class="container-fluid mt-5">
+    <div class="row wow fadeIn">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="">
+            <div>
+              <button type="button" mdbBtn color="primary" class="relative waves-light btn-sm"
+                (click)="basicModal.show()" mdbWavesEffect>Ajout depence</button>
+              <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+                aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+                      <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">Nouveau depence</h4>
+                      </div>
+                      <div class="modal-body">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="modeldepence._id">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>DAD</label>
+                            <input name="dad" id="dad" [(ngModel)]="modeldepence.dad" class="form-control" type="text"
+                              required>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>DAD Date</label>
+                            <input required name="dad_date" type="date" name="dad_date" id="dad_date"
+                              [(ngModel)]="modeldepence.dad_date" class="form-control">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>BC</label>
+                            <input name="bc" id="bc" [(ngModel)]="modeldepence.bc" class="form-control" type="text"
+                              required>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>BC Date</label>
+                            <input required name="bc_date" type="date" name="bc_date" id="bc_date"
+                              [(ngModel)]="modeldepence.bc_date" class="form-control">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Immatriculation</label>
+                            <select name="immat" id="immat" [(ngModel)]="modeldepence.immat" class="form-control"
+                              required>
+                              <option *ngFor="let vehi of listvehicules" value="{{vehi.matriculation}}">
+                                {{vehi.matriculation}}</option>
+
+                            </select>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Libelle</label>
+                            <select name="libelle" id="libelle" [(ngModel)]="modeldepence.libelle" class="form-control"
+                              required>
+                              <option value="Entretien">Entretien</option>
+                              <option value="Reparation">Reparation</option>
+                              <option value="Document administratif">Document administratif</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Fournisseurs</label>
+                            <select name="fournisseur" id="fournisseur" class="form-control"
+                              [(ngModel)]="modeldepence.fournisseur" required>
+                              <option *ngFor="let fournisseur of listfournisseurs" value="{{fournisseur.nom}}">
+                                {{fournisseur.nom}}</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Date intervention</label>
+                            <input name="intervention_date" id="intervention_date"
+                              [(ngModel)]="modeldepence.intervention_date" class="form-control" type="date" required>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>Montant</label>
+                            <input name="montant" id="montant" class="form-control" [(ngModel)]="modeldepence.montant"
+                              type="text" required>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>Facturé</label>
+                            <input name="facture" id="facture" class="form-control" [(ngModel)]="modeldepence.facture"
+                              type="text" required>
+                          </div>
+
+                          <div class="form-group col-md-6">
+                            <label>Description</label>
+                            <textarea name="description" id="description" [(ngModel)]="modeldepence.description"
+                              class="form-control"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" mdbBtn color="secondary" class="waves-light btn-sm" aria-label="Close"
+                          (click)="basicModal.hide()" mdbWavesEffect>Annuler</button>
+                        <button (click)="basicModal.hide()" type="submit" color="primary" mdbBtn
+                          [disabled]="form.invalid" class="relative waves-light btn-sm" mdbWavesEffect>
+                          <i class="far fa-save"> Enregistrer</i>
+                        </button>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fontsize07">
+            <h5>Listes des depences</h5>
+            <table class="table table-hover fontsize07">
+              <thead>
+                <th>DAD</th>
+                <th>DAD Date</th>
+                <th>BC</th>
+                <th>BC Date</th>
+                <th>Immatriculation</th>
+                <th>Libelle</th>
+                <th>Fournisseurs</th>
+                <th>Montant</th>
+                <th>Facturé</th>
+                <th>Date intervention</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let dep of listdepences" class="fontsize07">
+                  <td>{{ dep.dad }}</td>
+                  <td>{{ dep.dad_date }}</td>
+                  <td>{{ dep.bc }}</td>
+                  <td>{{ dep.bc_date }}</td>
+                  <td>{{ dep.immat }}</td>
+                  <td>{{ dep.libelle }}</td>
+                  <td>{{ dep.fournisseur }}</td>
+                  <td>{{ dep.montant }}</td>
+                  <td>{{ dep.facture }}</td>
+                  <td>{{ dep.intervention_date }}</td>
+                  <td>{{ dep.description }}</td>
+                  <td>
+                    <a (click)="onDelete(dep._id)" data-toggle="modal" data-target="#basicExampleModal" type="button"
+                      class="btn btn-outline-danger btn-sm px-2 waves-effect show_login">
+                      <i class="far fa-trash-alt"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

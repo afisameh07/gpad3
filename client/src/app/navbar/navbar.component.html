@@ -1,0 +1,29 @@
+<header>
+    <nav class="navbar fixed-top navbar-light white scrolling-navbar">
+        <div class="container-fluid">
+            <a routerLink="/" class="navbar-brand waves-effect"> <strong>Dashboard</strong></a>
+            <a class="nav-link" style="cursor:pointer" *ngIf="_authService.loggedIn()"
+                (click)="_authService.logoutUser()">Deconnecter</a>
+        </div>
+    </nav>
+    <div class="sidebar-fixed position-fixed">
+        <a class="logo-wrapper waves-effect">
+            <img src="assets/img/nes.png" class="img-fluid" alt="">
+        </a>
+
+        <br>
+        <br>
+        <br>
+        <div class="list-group list-group-flush" *ngIf="_authService.loggedIn()">
+            <!-- List group links -->
+            <a routerLink="/depences" class="list-group-item list-group-item-action waves-effect"> Depences</a>
+            <a routerLink="/vehicules" class="list-group-item list-group-item-action waves-effect"> Vehicules</a>
+            <a routerLink="/fournisseurs" class="list-group-item list-group-item-action waves-effect"> Fournisseurs</a>
+            <a routerLink="/configvehicules"
+                class="list-group-item list-group-item-action waves-effect">Configuration</a>
+            <!-- List group links -->
+        </div>
+        <br>
+        <!-- Sidebar -->
+    </div>
+</header>

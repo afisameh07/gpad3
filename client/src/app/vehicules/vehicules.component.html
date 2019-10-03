@@ -1,0 +1,131 @@
+<app-navbar></app-navbar>
+<!--Main layout-->
+<main class="pt-4 fontsize07">
+    <div class="container-fluid mt-5">
+        <div class="row wow fadeIn">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="">
+
+                        <div>
+                            <button type="button" mdbBtn color="primary" class="relative waves-light btn-sm"
+                                (click)="vehiculeModal.show()" mdbWavesEffect>Ajout vehicules</button>
+
+                            <h5>Listes des vehicules</h5>
+                            <table class="table table-hover">
+                                <thead>
+                                    <th>Matriculation</th>
+                                    <th>Type</th>
+                                    <th>Marque</th>
+                                    <th>Modele</th>
+                                    <th>Service</th>
+                                    <th>Date de mise en circulation</th>
+                                    <th>Actions</th>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let vehi of service.list">
+                                        <td>{{ vehi.matriculation }}</td>
+                                        <td>{{ vehi.typee }}</td>
+                                        <td>{{ vehi.marquee }}</td>
+                                        <td>{{ vehi.modelee }}</td>
+                                        <td>{{ vehi.servicee }}</td>
+                                        <td>{{ vehi.datacirculation }}</td>
+                                        <td>
+                                            <a (click)="vehiculeModal.show()" (click)="populateForm(vehi)" data-toggle="modal"
+                                                data-target="#basicExampleModal" type="button"
+                                                class="btn btn-outline-danger btn-sm px-2 waves-effect show_login">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                            <a (click)="onDelete(vehi._id)" data-toggle="modal"
+                                                data-target="#basicExampleModal" type="button"
+                                                class="btn btn-outline-danger btn-sm px-2 waves-effect show_login">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Modal -->
+                    </div>
+                    <!--/.Card-->
+                    <!--Grid row-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div mdbModal #vehiculeModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+                aria-labelledby="myvehiculeModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content ">
+                        <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+                            <div class="modal-header">
+                                <h4 class="modal-title w-100" id="myModalLabel">Nouvelle vehicule</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="service.formData._id">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Matriculation</label>
+                                        <input name="matriculation" #name="ngModel"
+                                            [(ngModel)]="service.formData.matriculation" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Type</label>
+                                        <select name="typee" id="typee" [(ngModel)]="service.formData.typee"
+                                            class="form-control" required>
+                                            <option *ngFor="let typee of listtype" value="{{typee.nom}}">
+                                                {{typee.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Marque</label>
+                                        <select name="marquee" id="marquee" [(ngModel)]="service.formData.marquee"
+                                            class="form-control" required>
+                                            <option *ngFor="let marquee of listmarque" value="{{marquee.nom}}">
+                                                {{marquee.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Modele</label>
+                                        <select name="modelee" id="modelee" [(ngModel)]="service.formData.modelee"
+                                            class="form-control" required>
+                                            <option *ngFor="let modelee of listmodle" value="{{modelee.nom}}">
+                                                {{modelee.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Service</label>
+                                        <select name="servicee" id="servicee" [(ngModel)]="service.formData.servicee"
+                                            class="form-control" required>
+                                            <option *ngFor="let servicee of listservice" value="{{servicee.nom}}">
+                                                {{servicee.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Date de mise en circulation</label>
+                                        <input required name="datacirculation" #salary="ngModel" type="date"
+                                            [(ngModel)]="service.formData.datacirculation" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" mdbBtn color="secondary" class="waves-light btn-sm"
+                                        aria-label="Close" (click)="vehiculeModal.hide()"
+                                        mdbWavesEffect>Annuler</button>
+                                    <button (click)="vehiculeModal.hide()" type="submit" color="primary" mdbBtn
+                                        [disabled]="form.invalid" class="relative waves-light btn-sm" mdbWavesEffect>
+                                        <i class="far fa-save"> Enregistrer</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>

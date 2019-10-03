@@ -1,0 +1,146 @@
+<app-navbar></app-navbar>
+<!--Main layout-->
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+            <!--Grid column-->
+            <div class="col-md-12 mb-4">
+                <!--Card-->
+                <div class="card">
+                    <!--Card content-->
+                    <div class="card-body">
+                        <H3 class="text-center">Configuration des vehicules</H3>
+
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Les types</th>
+                                    <th>Les marques</th>
+                                    <th>Les modeles</th>
+                                    <th>Les services</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <form class="form-inline" (ngSubmit)="onSubmittype(ftype)" #ftype="ngForm">
+                                            <input type="text" class="form-control with80" id="nom" required
+                                                [(ngModel)]="modeltypee.nom" name="nom" #nom="ngModel">
+                                            <button type="submit" data-toggle="modal" data-target="#basicExampleModal"
+                                                class="btn btn-outline-primary btn-sm px-2 waves-effect show_login">
+                                                <i class="fas fa-plus-square"></i>
+                                            </button>
+                                        </form>
+
+                                    </td>
+                                    <td>
+                                        <form class="form-inline" (ngSubmit)="onSubmitmarque(fmarque)"
+                                            #fmarque="ngForm">
+                                            <input type="text" class="form-control with80" id="nom" required
+                                                [(ngModel)]="modelmarque.nom" name="nom" #nom="ngModel">
+                                            <button type="submit" data-toggle="modal" data-target="#basicExampleModal"
+                                                class="btn btn-outline-primary btn-sm px-2 waves-effect show_login">
+                                                <i class="fas fa-plus-square"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form class="form-inline" (ngSubmit)="onSubmitmodel(fmodel)" #fmodel="ngForm">
+                                            <input type="text" class="form-control with80" id="nom" required
+                                                [(ngModel)]="model.nom" name="nom" #nom="ngModel">
+                                            <button type="submit" data-toggle="modal" data-target="#basicExampleModal"
+                                                class="btn btn-outline-primary btn-sm px-2 waves-effect show_login">
+                                                <i class="fas fa-plus-square"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form class="form-inline" (ngSubmit)="onSubmitservice(fservice)"
+                                            #fservice="ngForm">
+                                            <input type="text" class="form-control with80" id="nom" required
+                                                [(ngModel)]="modelservice.nom" name="nom" #nom="ngModel">
+                                            <button type="submit" data-toggle="modal" data-target="#basicExampleModal"
+                                                class="btn btn-outline-primary btn-sm px-2 waves-effect show_login">
+                                                <i class="fas fa-plus-square"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr *ngFor="let typee of listtype">
+                                                    <td>
+                                                        <a (click)="deletetype(typee._id)" data-toggle="modal"
+                                                            data-target="#basicExampleModal" type="button"
+                                                            class="btn btn-outline-danger btn-sm px-1 waves-effect show_login">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                        {{typee.nom}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr *ngFor="let marquee of listmarque">
+                                                    <td>
+                                                        <a (click)="deletemarque(marquee._id)" data-toggle="modal"
+                                                            data-target="#basicExampleModal" type="button"
+                                                            class="btn btn-outline-danger btn-sm px-1 waves-effect show_login">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                        {{marquee.nom}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr *ngFor="let modelle of listmodle">
+                                                    <td>
+                                                        <a (click)="deletemodele(modelle._id)" data-toggle="modal"
+                                                            data-target="#basicExampleModal" type="button"
+                                                            class="btn btn-outline-danger btn-sm px-1 waves-effect show_login">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                        {{modelle.nom}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr *ngFor="let servicee of listservice">
+                                                    <td>
+                                                        <a (click)="deleteservice(servicee._id)" data-toggle="modal"
+                                                            data-target="#basicExampleModal" type="button"
+                                                            class="btn btn-outline-danger btn-sm px-1 waves-effect show_login">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                        {{servicee.nom}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--/.Card-->
+            </div>
+        </div>
+        <!--Grid row-->
+    </div>
+</main>
+<app-footer></app-footer>

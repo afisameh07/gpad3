@@ -1,0 +1,20 @@
+<h3>Listes des utilisateurs</h3>
+
+<table class="table table-hover">
+  <thead>
+    <th>Nom & Prenom</th>
+    <th>Email ( login )</th>
+    <th>Mot de passe</th>
+    <th>Grade</th>
+  </thead>
+  <tr *ngFor="let uti of service.list">
+    <td>{{uti.name}}</td>
+    <td>{{uti.email}}</td>
+    <td>*********</td>
+    <td>{{uti.grade}}</td>
+    <td>
+      <button (click)="populateForm(uti)" class="btn btn-sm btn btn-outline-success">Modifier</button>
+      <button (click)="onDelete(uti._id)" class="btn btn-sm btn-outline-danger">Supprimer</button>
+    </td>
+  </tr>
+</table>

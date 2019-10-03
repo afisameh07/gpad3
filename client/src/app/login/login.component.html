@@ -1,0 +1,35 @@
+<!-- form card login -->
+<div class="container-fluid mt-5">
+  <!--Grid row-->
+  <div class="row wow fadeIn">
+      <div class="col-md-4 mb-4">
+      </div>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <!--Card content-->
+        <div class="card-body">
+          <h3 class="mb-0">Connectez-Vous !</h3>
+          <div>
+              <br>
+            <form class="form-inline" (submit)="loginUser()">
+              <label for="uname1">Nom d'utilisateur</label><br>
+              <input type="text" class="form-control" [(ngModel)]="loginUserData.email" name="email" required>
+              <br>
+              <br>
+              <label>Mot de passe</label><br>
+              <input type="password" class="form-control" [(ngModel)]="loginUserData.password" name="password" required>
+              <br>
+              <br>
+              <button type="button" (click)="loginUser()" class="btn btn-success float-right">Connexion</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>

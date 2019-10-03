@@ -1,0 +1,130 @@
+<app-navbar></app-navbar>
+<!--Main layout-->
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+        <!--Grid row-->
+        <!-- Modal -->
+        <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row wow fadeIn">
+            <!--Grid column-->
+            <div class="col-md-12 mb-4">
+                <!--Card-->
+                <div class="card">
+                    <!--Card content-->
+                    <div class="card-body widthfixed">
+                        <h3>Ajouter Assurance</h3>
+                        <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Date</label>
+                                    <!--
+                                    <input required name="dateajout" #dateajout="ngModel" type="date"
+                                        [(ngModel)]="service.formData.dateajout" class="form-control">
+                                        -->
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Date de validite</label>
+                                    <!--
+                                    <input required name="datevalidite" #datevalidite="ngModel" type="date"
+                                        [(ngModel)]="service.formData.datevalidite" class="form-control">
+                                    -->
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label>Immatriculation</label>
+                                    <select name="immat" id="immat" [(ngModel)]="service.formData"
+                                        class="form-control" required>
+                                       
+                                        <option *ngFor="let vehi of listvehicules" value="{{vehi.matriculation}}">
+                                            {{vehi.matriculation}}</option>
+
+                                    </select>
+                                    <!--
+                                    <select name="immat" id="immat" [(ngModel)]="modeldepence.immat"
+                                        class="form-control" required>
+                                       
+                                        <option *ngFor="let vehi of listvehicules" value="{{vehi.matriculation}}">
+                                            {{vehi.matriculation}}</option>
+
+                                    </select>-->
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label>Commentaires</label>
+                                    <textarea class="form-control"></textarea>
+
+
+                                </div>
+                                <div>
+                                    <button type="submit" [disabled]="form.invalid"
+                                        class="btn-sm btn-primary btn-lg btn-block">Enregistrer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <h3>Listes des Assurances</h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <th>Date</th>
+                                <th>Date de validite</th>
+                                <th>Vehicule</th>
+                                <th>Commentaires</th>
+                                <th>Actions</th>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let vehi of service.list">
+                                    <td>{{ vehi.matriculation }}</td>
+                                    <td>{{ vehi.typee }}</td>
+                                    <td>{{ vehi.marquee }}</td>
+                                    <td>{{ vehi.modelee }}</td>
+                                    <td>{{ vehi.servicee }}</td>
+                                    <td>{{ vehi.datacirculation }}</td>
+                                    <td>
+                                        <a (click)="populateForm(vehi)" data-toggle="modal"
+                                            data-target="#basicExampleModal" type="button"
+                                            class="btn btn-outline-danger btn-sm px-2 waves-effect show_login">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <a (click)="onDelete(vehi._id)" data-toggle="modal"
+                                            data-target="#basicExampleModal" type="button"
+                                            class="btn btn-outline-danger btn-sm px-2 waves-effect show_login">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Modal -->
+                </div>
+                <!--/.Card-->
+            </div>
+        </div>
+        <!--Grid row-->
+    </div>
+</main>
+<app-footer></app-footer>

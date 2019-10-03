@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+
+<!--Main Navigation-->
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+            <!--Grid column-->
+            <div class="col-md-12 mb-4">
+                <!--Card-->
+                <div class="card">
+                    <!--Card content-->
+                    <div class="card-body">
+                        <H3 class="text-center">Listes des fournisseurs</H3>
+                        <form class="form-inline" (ngSubmit)="onSubmitfournisseurs(ffournisseurs)"
+                            #ffournisseurs="ngForm">
+                            <label>Nom : </label>
+                            <input type="text" class="form-control" id="nom" required
+                                [(ngModel)]="modelfournisseurs.nom" name="nom" #nom="ngModel">
+                            <label>Telephone : </label>
+
+                            <input type="text" class="form-control" id="tel" required
+                                [(ngModel)]="modelfournisseurs.tel" name="tel" #tel="ngModel">
+                            <label>Description : </label>
+                            <input type="text" class="form-control" id="description" required
+                                [(ngModel)]="modelfournisseurs.description" name="description" #description="ngModel">
+                            <button type="submit" class="btn-primary btn btn-sm">Enregistrer</button>
+                        </form>
+                        <br>
+                        <table class="table table-bordered">
+                            <!--listgroupe-->
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Telephone</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let listgr of listgroupe">
+                                    <td>{{listgr.nom}}</td>
+                                    <td>{{listgr.tel}}</td>
+                                    <td>{{listgr.description}}</td>
+                                    <td>
+
+                                        <a (click)="deletegr(listgr._id)" data-toggle="modal"
+                                            data-target="#basicExampleModal" type="button"
+                                            class="btn btn-outline-danger btn-sm px-2 waves-effect show_login">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--/.Card-->
+            </div>
+        </div>
+        <!--Grid row-->
+    </div>
+</main>
+<app-footer></app-footer>

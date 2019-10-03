@@ -1,0 +1,22 @@
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="service.formData._id">
+  <input type="hidden" name="grade" ng-value="2" [(ngModel)]="service.formData.grade">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>Nom & Prenom</label>
+      <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control" required>
+      <div class="validation-error" *ngIf="name.invalid && name.touched">This field is required.</div>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Email</label>
+      <input name="email" #name="ngModel" [(ngModel)]="service.formData.email" class="form-control" required>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Mot de passe</label>
+      <input name="pwd" #salary="ngModel" [(ngModel)]="service.formData.pwd" class="form-control">
+    </div>
+    <div>
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-lg btn-block">Ajouter</button>
+    </div>
+  </div>
+</form>

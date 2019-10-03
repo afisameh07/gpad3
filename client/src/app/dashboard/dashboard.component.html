@@ -1,0 +1,220 @@
+<app-navbar></app-navbar>
+<!--Main Navigation-->
+<!--Main layout-->
+
+
+
+<main class="pt-5">
+    <div class="container-fluid mt-3">
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+            <!--Grid column-->
+            <div class="col-md-12">
+                <!--Card-->
+                <!--Card content-->
+                <div class="card-body">
+                    <app-login *ngIf="!_authService.loggedIn()"></app-login>
+                    <div *ngIf="_authService.loggedIn()">
+                        <!--Depences par types de vehicules-->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="d-flex flex-nowrap">
+                                                        <div class="order-1 p-2 floatleft">
+                                                            <table>
+                                                                <tr>
+                                                                    <td class="radiofixer">
+                                                                        <input (click)="filter_dadd()" type="radio"
+                                                                            class="form-check-input"
+                                                                            id="materialGroupExample1"
+                                                                            name="groupOfMaterialRadios" checked>
+                                                                        <label class="form-check-label"
+                                                                            for="materialGroupExample1">Date DAD</label>
+                                                                    </td>
+                                                                    <td class="radiofixer"> <input
+                                                                            (click)="filter_bcc()" type="radio"
+                                                                            class="form-check-input"
+                                                                            id="materialGroupExample2"
+                                                                            name="groupOfMaterialRadios">
+                                                                        <label class="form-check-label"
+                                                                            for="materialGroupExample2">Date BC</label>
+                                                                    </td>
+                                                                    <td class="radiofixer"> <input
+                                                                            (click)="filter_interr()" type="radio"
+                                                                            class="form-check-input"
+                                                                            id="materialGroupExample3"
+                                                                            name="groupOfMaterialRadios">
+                                                                        <label class="form-check-label"
+                                                                            for="materialGroupExample3">Date
+                                                                            intervetion</label></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="order-1 p-2 col-sm-3 floatleft">
+                                                            Date de debut :
+                                                            <input required type="date" name="newdatedebut"
+                                                                id="newdatedebut" [(ngModel)]="newdatedebut"
+                                                                (ngModelChange)="d_debut_change($event)"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="order-2 p-2 col-sm-3 floatleft">
+                                                            Date de fin :
+                                                            <input required type="date" name="newdatefin"
+                                                                id="newdatefin" [(ngModel)]="newdatefin"
+                                                                (ngModelChange)="d_fin_change($event)"
+                                                                class="form-control">
+                                                        </div>
+
+                                                        <div class="order-2 p-2 lignefixer">
+                                                            <br>
+                                                            <a (click)="onsearch()" data-toggle="modal"
+                                                                data-target="#basicExampleModal" type="button"
+                                                                class="btn-sm btn-outline-primary px-2 waves-effect">
+                                                                <i class="fas fa-search"></i>&nbsp;Chercher
+                                                            </a>
+                                                            <a (click)="onexcel()" data-toggle="modal"
+                                                                data-target="#basicExampleModal" type="button"
+                                                                class="btn-sm btn-outline-primary px-2 waves-effect">
+                                                                <i class="far fa-file-excel"></i>&nbsp;Excel
+                                                            </a>
+                                                        </div>
+
+                                                        <div *ngIf="!datavalideshowbutton"
+                                                            class="order-3 p-2 lignefixer">
+                                                            <br>
+                                                            <h3><span class="badge badge-danger">{{msg}}</span></h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="font-weight-bold">Depences par types de vehicules</h5>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <th class="font-weight-bold">Type de vehicules</th>
+                                                <th class="font-weight-bold ligneright">Total</th>
+                                                <th class="font-weight-bold" *ngFor="let list_lib of list_libelle">
+                                                    {{ list_lib }}
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let typev of list_type_vehicules; index as i">
+                                                    <td class="font-weight-bold" width="100px">{{ typev }}</td>
+                                                    <td width="100px" class="ligneright">
+                                                        <span>
+                                                            {{ getpourcentage(i) }}
+                                                            %
+                                                        </span>
+                                                        <span class="font-weight-bold floatright">
+                                                            {{ gettotal(i) }}
+                                                        </span>
+                                                        <progress max='100' value='{{ getpourcentage(i) }}'
+                                                            class="css3">
+                                                        </progress>
+                                                    </td>
+                                                    <td width="100px" *ngFor="let list_lib of list_libelle"
+                                                        class="ligneright">
+                                                        <span>
+                                                            {{ rapport_pourcentage(get_groupe_somme_pour(typev,list_lib),getpourcentage(i)) }}
+                                                            %
+                                                        </span>
+                                                        <span class="font-weight-bold floatright">
+                                                            {{ get_groupe_somme(typev,list_lib) }}
+                                                        </span>
+
+                                                        <progress max='{{ getpourcentage(i) }}'
+                                                            value='{{ get_groupe_somme_pour(typev,list_lib) }}'
+                                                            class="html5">
+                                                        </progress>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Depences par types de vehicules-->
+                        <div class="col-md-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="font-weight-bold">Depences par vehicules</h5>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th class="font-weight-bold">Vehicule</th>
+                                            <th class="font-weight-bold ligneright">Total</th>
+                                            <th class="font-weight-bold" *ngFor="let list_lib of list_libelle">
+                                                {{ list_lib }}
+                                            </th>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let vee of list_vehicules; index as ii">
+                                                <td class="font-weight-bold" width="100px">{{ vee }}</td>
+                                                <td width="100px" class="ligneright">
+                                                    <span>
+                                                        {{ getpourcentagevehicule(ii) }}
+                                                        %
+                                                    </span>
+                                                    <span class="font-weight-bold floatright">
+                                                        {{ vehicule_montants[ii] }}
+                                                    </span>
+                                                    <progress max='100' value='
+                                                            {{ getpourcentagevehicule(ii) }}
+                                                            ' class="css3">
+                                                    </progress>
+                                                </td>
+                                                <td width="100px" *ngFor="let list_lib of list_libelle"
+                                                    class="ligneright">
+                                                    <span>
+                                                        {{ rapport_pourcentage_v(get_somme_vehicule(vee,list_lib), vehicule_montants[ii]) }}
+                                                        %
+                                                    </span>
+                                                    <span class="font-weight-bold floatright">
+                                                        {{ get_somme_vehicule(vee,list_lib) }}</span>
+
+                                                    <progress max='
+                                                            {{ vehicule_montants[ii] }}
+                                                            ' value='
+                                                            {{ get_somme_vehicule(vee,list_lib) }}
+                                                            ' class="html5">
+                                                    </progress>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -Depences par types de vehicules
+
+                        Start your project here-->
+
+                        <!-- /Start your project here-->
+                        <!--Depences par services-->
+                        <!--
+                        <div class="col-md-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Depences par services</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    -->
+                        <!--Depences par services-->
+                    </div>
+                </div>
+                <!--/.Card-->
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+</main>
+<app-footer></app-footer>
